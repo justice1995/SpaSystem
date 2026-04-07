@@ -17,7 +17,7 @@ namespace Tests.Domain
             var service = new Service("Hair", 100, 30);
 
             service.Id.Should().NotBeEmpty();
-            service.Name.Should().Be("Hair1");
+            service.Name.Should().Be("Hair");
         }
 
         [Fact]
