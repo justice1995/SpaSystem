@@ -32,11 +32,13 @@ namespace Booking.Infrastructure.DependencyInjection
             //    new SqlConnection(configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IBookingDapperContext, BookingDapperContext>();
 
-            // Repositories
+            //Command Repositories
             services.AddScoped<IServiceRepository,ServiceRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             //Query Repositories
             services.AddScoped<IServiceQuery, ServiceQuery>();
+            services.AddScoped<ICustomerQuery, CustomerQuery>();
 
             //Unit Of Work 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
