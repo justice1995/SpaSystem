@@ -9,6 +9,12 @@ namespace Booking.Application.Features.Services.Command.UpdateService
 {
     public class UpdateServiceCommand:IRequest<bool>
     {
+        public UpdateServiceCommand(Guid id, string name, decimal price, int duration) {
+            Id = id;
+            Name = name;
+            Price = price;
+            Duration = duration;
+        }
         public Guid Id { get; init; }
         public string Name { get; init; }
         public decimal Price { get; init; }

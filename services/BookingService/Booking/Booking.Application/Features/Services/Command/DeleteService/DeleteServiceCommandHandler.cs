@@ -18,6 +18,7 @@ namespace Booking.Application.Features.Services.Command.DeleteService
             _unitOfWork = unitOfWork;
             _serviceRepository = serviceRepository;
         }
+
         public async Task<bool> Handle(DeleteServiceCommand request, CancellationToken cancellationToken)
         {
             var service= await _serviceRepository.GetByIdAsync(request.Id);
