@@ -52,5 +52,6 @@ namespace Booking.API.Controllers
             var result = await _mediator.Send(new GetAllServicesQuery());
             return Ok(result);
         }
+        
     }
 }
