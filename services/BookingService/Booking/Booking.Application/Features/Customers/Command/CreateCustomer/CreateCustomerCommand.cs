@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Application.Features.Customers.Command.CreateCustomer
+namespace BookingSystem.Application.Features.Customers.Command.CreateCustomer
 {
     public record CreateCustomerCommand : IRequest<Guid>
     {

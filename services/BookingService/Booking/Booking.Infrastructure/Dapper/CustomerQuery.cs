@@ -1,5 +1,5 @@
-﻿using Booking.Application.Common.Interfaces.Queries;
-using Booking.Application.Features.Customers.DTOs;
+﻿using BookingSystem.Application.Common.Interfaces.Queries;
+using BookingSystem.Application.Features.Customers.DTOs;
 using Dapper;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Infrastructure.Dapper
+namespace BookingSystem.Infrastructure.Dapper
 {
     public class CustomerQuery : ICustomerQuery
     {

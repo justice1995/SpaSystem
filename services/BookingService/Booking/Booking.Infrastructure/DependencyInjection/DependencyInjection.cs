@@ -1,10 +1,10 @@
-﻿using Booking.Application.Common.Interfaces;
-using Booking.Application.Common.Interfaces.Queries;
-using Booking.Application.Common.Interfaces.Repositories;
-using Booking.Infrastructure.Dapper;
-using Booking.Infrastructure.Persistence.DBContexts;
-using Booking.Infrastructure.Persistence.Repositories;
-using Booking.Infrastructure.Persistence.UnitOfWork;
+﻿using BookingSystem.Application.Common.Interfaces;
+using BookingSystem.Application.Common.Interfaces.Queries;
+using BookingSystem.Application.Common.Interfaces.Repositories;
+using BookingSystem.Infrastructure.Dapper;
+using BookingSystem.Infrastructure.Persistence.DBContexts;
+using BookingSystem.Infrastructure.Persistence.Repositories;
+using BookingSystem.Infrastructure.Persistence.UnitOfWork;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Infrastructure.DependencyInjection
+namespace BookingSystem.Infrastructure.DependencyInjection
 {
     public static class DependencyInjection
     {
@@ -35,6 +35,7 @@ namespace Booking.Infrastructure.DependencyInjection
             //Command Repositories
             services.AddScoped<IServiceRepository,ServiceRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
 
             //Query Repositories
             services.AddScoped<IServiceQuery, ServiceQuery>();

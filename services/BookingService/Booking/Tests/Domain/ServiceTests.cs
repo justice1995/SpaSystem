@@ -1,4 +1,4 @@
-﻿using Booking.Domain.Entities;
+﻿using BookingSystem.Domain.Entities;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;

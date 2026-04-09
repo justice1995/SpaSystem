@@ -1,11 +1,11 @@
-﻿using Booking.Application.Features.Customers.Command.CreateCustomer;
-using Booking.Application.Features.Customers.Queries.GetAllCustomers;
-using Booking.Application.Features.Customers.Queries.GetById;
+﻿using BookingSystem.Application.Features.Customers.Command.CreateCustomer;
+using BookingSystem.Application.Features.Customers.Queries.GetAllCustomers;
+using BookingSystem.Application.Features.Customers.Queries.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Booking.API.Controllers
+namespace BookingSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

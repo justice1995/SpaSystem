@@ -1,4 +1,4 @@
-﻿using Booking.Application.Features.Services.Command.CreateService;
+﻿using BookingSystem.Application.Features.Services.Command.CreateService;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Application.DependencyInjection
+namespace BookingSystem.Application.DependencyInjection
 {
     public static class DependencyInjection
     {

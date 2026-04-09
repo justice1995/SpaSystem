@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingSystem.Domain.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Booking.Infrastructure.Persistence.Models;

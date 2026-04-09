@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Application.Features.Services.Command.UpdateService
+namespace BookingSystem.Application.Features.Services.Command.UpdateService
 {
     public class UpdateServiceCommand:IRequest<bool>
     {

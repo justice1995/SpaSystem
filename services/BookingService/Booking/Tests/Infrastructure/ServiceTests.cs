@@ -1,7 +1,7 @@
-﻿using Booking.Domain.Entities;
-using Booking.Infrastructure.Dapper;
-using Booking.Infrastructure.Persistence.DBContexts;
-using Booking.Infrastructure.Persistence.Repositories;
+﻿using BookingSystem.Domain.Entities;
+using BookingSystem.Infrastructure.Dapper;
+using BookingSystem.Infrastructure.Persistence.DBContexts;
+using BookingSystem.Infrastructure.Persistence.Repositories;
 using Castle.Core.Configuration;
 using FluentAssertions;
 using Microsoft.Data.Sqlite;

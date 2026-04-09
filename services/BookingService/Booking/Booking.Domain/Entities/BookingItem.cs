@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Domain.Entities
+namespace BookingSystem.Domain.Entities
 {
     public class BookingItem
     {
@@ -12,20 +12,23 @@ namespace Booking.Domain.Entities
 
         public Guid BookingId { get; private set; }
 
-        public string ProductName { get; private set; }
+        public Guid ServiceId { get; private set; }
 
+        public string ServiceName { get; private set; }
         public decimal Price { get; private set; }
 
         public int Quantity { get; private set; }
+        public DateTime CreatedAt { get; private set; }
 
         public decimal TotalPrice => Price * Quantity;
 
         // EF constructor
         private BookingItem() { }
-        internal BookingItem(string productName, decimal price, int quantity)
+
+        public BookingItem(Guid serviceId,string serviceName, decimal price, int quantity)
         {
-            if (string.IsNullOrWhiteSpace(productName))
-                throw new ArgumentException("Product name is required");
+            if (string.IsNullOrWhiteSpace(serviceName))
+                throw new ArgumentException("Service name is required");
 
             if (price <= 0)
                 throw new ArgumentException("Price must be greater than 0");
@@ -34,13 +37,15 @@ namespace Booking.Domain.Entities
                 throw new ArgumentException("Quantity must be greater than 0");
 
             Id = Guid.NewGuid();
-            ProductName = productName;
+            ServiceName = serviceName;
+            ServiceId = serviceId;
             Price = price;
             Quantity = quantity;
+            CreatedAt = DateTime.Now;
         }
 
         // Business logic
-        internal void UpdateQuantity(int quantity)
+        public void UpdateQuantity(int quantity)
         {
             if (quantity <= 0)
                 throw new ArgumentException("Quantity must be greater than 0");
@@ -48,7 +53,7 @@ namespace Booking.Domain.Entities
             Quantity = quantity;
         }
 
-        internal void UpdatePrice(decimal price)
+        public void UpdatePrice(decimal price)
         {
             if (price <= 0)
                 throw new ArgumentException("Price must be greater than 0");

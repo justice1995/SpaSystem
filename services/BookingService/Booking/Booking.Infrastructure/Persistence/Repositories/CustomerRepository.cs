@@ -1,7 +1,7 @@
-﻿using Booking.Application.Common.Interfaces.Repositories;
-using Booking.Domain.Entities;
-using Booking.Infrastructure.Persistence.DBContexts;
-using Booking.Infrastructure.Persistence.Mappings;
+﻿using BookingSystem.Application.Common.Interfaces.Repositories;
+using BookingSystem.Domain.Entities;
+using BookingSystem.Infrastructure.Persistence.DBContexts;
+using BookingSystem.Infrastructure.Persistence.Mappings;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Infrastructure.Persistence.Repositories
+namespace BookingSystem.Infrastructure.Persistence.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
@@ -22,14 +22,12 @@ namespace Booking.Infrastructure.Persistence.Repositories
 
         public async Task AddAsync(Customer customer)
         {
-            var entity = customer.ToPersistence();
-            await _context.Customers.AddAsync(entity);
+            await _context.Customers.AddAsync(customer);
         }
 
         public void Delete(Customer customer)
         {
-            var entity = customer.ToPersistence();
-            _context.Customers.Remove(entity);
+            _context.Customers.Remove(customer);
         }
 
         public async Task<List<Customer?>> GetAllAsync()
@@ -37,7 +35,7 @@ namespace Booking.Infrastructure.Persistence.Repositories
             var entities = await _context.Customers
                 .AsNoTracking()
                 .ToListAsync();
-            return entities.Select(x => x.ToDomain()).ToList<Customer?>();
+            return entities;
         }
 
         public async Task<Customer?> GetByIdAsync(Guid id)
@@ -46,13 +44,12 @@ namespace Booking.Infrastructure.Persistence.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            return entity?.ToDomain();
+            return entity;
         }
 
         public void Update(Customer customer)
         {
-            var entity = customer.ToPersistence();
-            _context.Customers.Update(entity);
+            _context.Customers.Update(customer);
         }
     }
 }

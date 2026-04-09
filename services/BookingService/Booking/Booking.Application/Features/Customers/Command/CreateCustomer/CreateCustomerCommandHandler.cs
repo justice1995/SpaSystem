@@ -1,5 +1,5 @@
-﻿using Booking.Application.Common.Interfaces;
-using Booking.Application.Common.Interfaces.Repositories;
+﻿using BookingSystem.Application.Common.Interfaces;
+using BookingSystem.Application.Common.Interfaces.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Application.Features.Customers.Command.CreateCustomer
+namespace BookingSystem.Application.Features.Customers.Command.CreateCustomer
 {
     public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Guid>
     {
