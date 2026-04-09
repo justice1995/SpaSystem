@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Application.Common.Interfaces
+namespace BookingSystem.Application.Common.Interfaces
 {
     public interface IUnitOfWork:IDisposable
     {

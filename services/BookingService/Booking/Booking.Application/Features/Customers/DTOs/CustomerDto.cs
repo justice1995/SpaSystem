@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Application.Features.Customers.DTOs
+namespace BookingSystem.Application.Features.Customers.DTOs
 {
     public class CustomerDto
     {

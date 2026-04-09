@@ -1,15 +1,16 @@
-﻿using Booking.Application.Common.Interfaces.Repositories;
-using Booking.Domain.Entities;
-using Booking.Infrastructure.Persistence.DBContexts;
-using Booking.Infrastructure.Persistence.Mappings;
+﻿using BookingSystem.Application.Common.Interfaces.Repositories;
+using BookingSystem.Domain.Entities;
+using BookingSystem.Infrastructure.Persistence.DBContexts;
+using BookingSystem.Infrastructure.Persistence.Mappings;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Dapper.SqlMapper;
 
-namespace Booking.Infrastructure.Persistence.Repositories
+namespace BookingSystem.Infrastructure.Persistence.Repositories
 {
     public class ServiceRepository : IServiceRepository
     {
@@ -20,37 +21,27 @@ namespace Booking.Infrastructure.Persistence.Repositories
         }
         public async Task AddAsync(Service service)
         {
-            var entity = service.ToPersistence();
-            await _context.Services.AddAsync(entity);
+            await _context.Services.AddAsync(service);
         }
 
         public void Delete(Service service)
         {
-            var entity = service.ToPersistence();
-            _context.Services.Remove(entity);
+            _context.Services.Remove(service);
         }
 
         public async Task<List<Service>> GetAllAsync()
         {
-            var entities = await _context.Services
-            .AsNoTracking()
-            .ToListAsync();
-            return entities.Select(x => x.ToDomain()).ToList();
+            return await _context.Services.AsNoTracking().ToListAsync();
         }
 
         public async Task<Service?> GetByIdAsync(Guid id)
         {
-            var entity = await _context.Services
-            .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Id == id);
-
-            return entity?.ToDomain();
+            return await _context.Services.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id); 
         }
 
         public void Update(Service service)
         {
-            var entity = service.ToPersistence();
-            _context.Services.Update(entity);
+            _context.Services.Update(service);
         }
     }
 }

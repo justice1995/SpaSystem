@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Application.Features.Services.Command.DeleteService
+namespace BookingSystem.Application.Features.Services.Command.DeleteService
 {
     public class DeleteServiceCommand:IRequest<bool>
     {

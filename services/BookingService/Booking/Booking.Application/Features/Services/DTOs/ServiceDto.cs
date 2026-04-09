@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Application.Features.Services.DTOs
+namespace BookingSystem.Application.Features.Services.DTOs
 {
     public class ServiceDto
     {

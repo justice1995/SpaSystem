@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Infrastructure.Dapper
+namespace BookingSystem.Infrastructure.Dapper
 {
     public interface IBookingDapperContext
     {

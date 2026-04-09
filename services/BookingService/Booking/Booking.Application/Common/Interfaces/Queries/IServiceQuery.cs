@@ -1,11 +1,11 @@
-﻿using Booking.Application.Features.Services.DTOs;
+﻿using BookingSystem.Application.Features.Services.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Application.Common.Interfaces.Queries
+namespace BookingSystem.Application.Common.Interfaces.Queries
 {
     public interface IServiceQuery
     {

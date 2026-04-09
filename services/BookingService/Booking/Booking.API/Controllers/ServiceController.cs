@@ -1,13 +1,13 @@
-﻿using Booking.Application.Features.Services.Command.CreateService;
-using Booking.Application.Features.Services.Command.DeleteService;
-using Booking.Application.Features.Services.Command.UpdateService;
-using Booking.Application.Features.Services.Queries.GetAllServices;
-using Booking.Application.Features.Services.Queries.GetById;
+﻿using BookingSystem.Application.Features.Services.Command.CreateService;
+using BookingSystem.Application.Features.Services.Command.DeleteService;
+using BookingSystem.Application.Features.Services.Command.UpdateService;
+using BookingSystem.Application.Features.Services.Queries.GetAllServices;
+using BookingSystem.Application.Features.Services.Queries.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Booking.API.Controllers
+namespace BookingSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookingSystem.Domain.Entities;
 
-namespace Booking.Application.Common.Interfaces.Repositories
+namespace BookingSystem.Application.Common.Interfaces.Repositories
 {
     public interface IBookingRepository
     {
-        Task<Booking.Domain.Entities.Booking> GetByIdAsync(Guid id);
+        Task<Booking> GetByIdAsync(Guid id);
 
-        Task<List<Booking.Domain.Entities.Booking>> GetAllAsync();
+        Task<List<Booking>> GetAllAsync();
 
-        Task AddAsync(Booking.Domain.Entities.Booking booking);
+        Task AddAsync(Booking booking);
 
-        void Update(Booking.Domain.Entities.Booking booking);
+        void Update(Booking booking);
 
-        void Delete(Booking.Domain.Entities.Booking booking);
+        void Delete(Booking booking);
     }
 }

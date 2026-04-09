@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Booking.Infrastructure.Persistence.Models;
+namespace BookingSystem.Infrastructure.Persistence.Models;
 
 public partial class BookingPayment
 {

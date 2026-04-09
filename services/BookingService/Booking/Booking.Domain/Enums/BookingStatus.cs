@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookingSystem.Application
+namespace BookingSystem.Domain.Enums
 {
-    public static class AssemblyReference
+    public enum BookingStatus
     {
+        Pending,
+        Confirmed,
+        Cancelled
     }
 }

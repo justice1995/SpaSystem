@@ -1,5 +1,5 @@
-﻿using Booking.Application.Common.Interfaces;
-using Booking.Infrastructure.Persistence.DBContexts;
+﻿using BookingSystem.Application.Common.Interfaces;
+using BookingSystem.Infrastructure.Persistence.DBContexts;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Infrastructure.Persistence.UnitOfWork
+namespace BookingSystem.Infrastructure.Persistence.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

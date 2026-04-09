@@ -1,12 +1,12 @@
-﻿using Booking.Domain.Entities;
-using Booking.Infrastructure.Persistence.Models;
+﻿using BookingSystem.Domain.Entities;
+using BookingSystem.Infrastructure.Persistence.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.Infrastructure.Persistence.Mappings
+namespace BookingSystem.Infrastructure.Persistence.Mappings
 {
     public static class ServiceMapping
     {

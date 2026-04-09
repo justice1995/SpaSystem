@@ -1,6 +1,6 @@
-using Booking.Application.DependencyInjection;
-using Booking.Application.Features.Services.Command.CreateService;
-using Booking.Infrastructure.DependencyInjection;
+using BookingSystem.Application.DependencyInjection;
+using BookingSystem.Application.Features.Services.Command.CreateService;
+using BookingSystem.Infrastructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
