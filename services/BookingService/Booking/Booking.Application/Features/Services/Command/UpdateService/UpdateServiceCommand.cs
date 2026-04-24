@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using BookingSystem.Domain.Common;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.Application.Features.Services.Command.UpdateService
 {
-    public class UpdateServiceCommand:IRequest<bool>
+    public class UpdateServiceCommand : IRequest<Result<bool>>
     {
-        public UpdateServiceCommand(Guid id, string name, decimal price, int duration) {
+        public UpdateServiceCommand(Guid id, string name, decimal price, int duration)
+        {
             Id = id;
             Name = name;
             Price = price;

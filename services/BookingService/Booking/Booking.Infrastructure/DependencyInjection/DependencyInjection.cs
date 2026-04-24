@@ -36,10 +36,12 @@ namespace BookingSystem.Infrastructure.DependencyInjection
             services.AddScoped<IServiceRepository,ServiceRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             //Query Repositories
             services.AddScoped<IServiceQuery, ServiceQuery>();
             services.AddScoped<ICustomerQuery, CustomerQuery>();
+            services.AddScoped<ISalaryQuery, SalaryQuery>();
 
             //Unit Of Work 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

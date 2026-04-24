@@ -10,4 +10,8 @@
     <None Include="Entities\Service.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
+
 </Project>
