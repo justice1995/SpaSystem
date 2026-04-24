@@ -1,4 +1,5 @@
-﻿using BookingSystem.Application.Features.Services.Command.CreateService;
+﻿using BookingSystem.API.Common;
+using BookingSystem.Application.Features.Services.Command.CreateService;
 using BookingSystem.Application.Features.Services.Command.DeleteService;
 using BookingSystem.Application.Features.Services.Command.UpdateService;
 using BookingSystem.Application.Features.Services.Queries.GetAllServices;
@@ -29,7 +30,7 @@ namespace BookingSystem.API.Controllers
         public async Task<IActionResult> UpdateService([FromBody] UpdateServiceCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);
+            return result.ToActionResult();
         }
 
         [HttpDelete]
@@ -43,15 +44,17 @@ namespace BookingSystem.API.Controllers
         public async Task<IActionResult> GetServiceById(Guid id)
         {
             var result = await _mediator.Send(new GetByIdQuery { Id = id });
-            return Ok(result);
+            return result.ToActionResult(); ;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllServices()
         {
             var result = await _mediator.Send(new GetAllServicesQuery());
+            int a = 10;
+            int b = a / 0;
             return Ok(result);
         }
-        
+
     }
 }

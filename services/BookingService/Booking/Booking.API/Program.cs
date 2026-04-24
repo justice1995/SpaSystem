@@ -1,3 +1,4 @@
+using BookingSystem.API.Middlewares;
 using BookingSystem.Application.DependencyInjection;
 using BookingSystem.Application.Features.Services.Command.CreateService;
 using BookingSystem.Infrastructure.DependencyInjection;
@@ -21,11 +22,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
-
+//app.UseExceptionHandler("/error");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 
 app.Run();

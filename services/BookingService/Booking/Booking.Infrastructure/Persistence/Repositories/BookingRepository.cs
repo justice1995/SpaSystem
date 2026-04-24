@@ -28,6 +28,13 @@ namespace BookingSystem.Infrastructure.Persistence.Repositories
 
         public async Task<List<Domain.Entities.Booking>> GetAllAsync()
         {
+            var aaa = _context.Bookings.Include(x => x.Items);
+            var bbb = _context.Bookings.Include(x => x.Items).ToListAsync();
+            var ccc = _context.Bookings.GroupBy(x=>x.Id).Select(b=>new
+            {
+                a1= b.Key,
+                a2=b.Select(x=>x.Items).ToList()
+            });
             return await _context.Bookings.Include(x => x.Items).ToListAsync();
         }
 

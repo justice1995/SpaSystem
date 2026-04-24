@@ -21,11 +21,20 @@ public partial class BookingDbContext : DbContext
     public virtual DbSet<Customer> Customers { get; set; }
 
     //public virtual DbSet<OutboxMessage> OutboxMessages { get; set; }
-
+    public virtual DbSet<Employee> Employees { get; set; }
     public DbSet<Service> Services { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //    var schema = $"clinic_{_currentTenant.Id}";
+        //    modelBuilder.HasDefaultSchema(schema);
+        modelBuilder.Entity<Employee>(entity =>
+        {
+            entity.Property(e => e.EmployeeType)
+                  .HasConversion<string>()
+                  .HasMaxLength(50)
+                  .IsRequired();
+        });
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(BookingDbContext).Assembly);
         OnModelCreatingPartial(modelBuilder);
     }
