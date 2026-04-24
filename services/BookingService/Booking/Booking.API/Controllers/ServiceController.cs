@@ -51,8 +51,6 @@ namespace BookingSystem.API.Controllers
         public async Task<IActionResult> GetAllServices()
         {
             var result = await _mediator.Send(new GetAllServicesQuery());
-            int a = 10;
-            int b = a / 0;
             return Ok(result);
         }
 
