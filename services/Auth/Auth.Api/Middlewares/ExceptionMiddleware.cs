@@ -36,6 +36,7 @@
                 Detailed = _env.IsDevelopment() ? exception.Message : "Something went wrong"
             };
             // Cmt in develop
+            // Cmt in ft/login
             // Cmt in ft/reg
             return context.Response.WriteAsJsonAsync(response);
         }
