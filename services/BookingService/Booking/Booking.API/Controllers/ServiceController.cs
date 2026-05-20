@@ -1,7 +1,9 @@
-﻿using BookingSystem.API.Common;
+﻿using Asp.Versioning;
+using BookingSystem.API.Common;
 using BookingSystem.Application.Features.Services.Command.CreateService;
 using BookingSystem.Application.Features.Services.Command.DeleteService;
 using BookingSystem.Application.Features.Services.Command.UpdateService;
+using BookingSystem.Application.Features.Services.DTOs;
 using BookingSystem.Application.Features.Services.Queries.GetAllServices;
 using BookingSystem.Application.Features.Services.Queries.GetById;
 using MediatR;
@@ -10,12 +12,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookingSystem.API.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/service")]
     [ApiController]
-    public class ServiceController : ControllerBase
+    public class ServiceController1 : ControllerBase
     {
         private readonly IMediator _mediator;
-        public ServiceController(IMediator mediator)
+        public ServiceController1(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -40,7 +43,20 @@ namespace BookingSystem.API.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Get Service By Id
+        /// </summary>
+        /// <remarks>
+        /// Get Service By Id 1
+        /// </remarks>
+        /// <param name="id">Service identifier</param>
+        /// <response code="200">Success</response>
+        /// <response code="404">Service not found</response>
+        
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(APISuccessReponse<ServiceDto>), 200)]
+        [ProducesResponseType(typeof(APIErrorResponse), 404)]
+        [ProducesResponseType(typeof(APIErrorResponse), 400)]
         public async Task<IActionResult> GetServiceById(Guid id)
         {
             var result = await _mediator.Send(new GetByIdQuery { Id = id });
