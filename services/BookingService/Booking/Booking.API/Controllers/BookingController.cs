@@ -16,6 +16,9 @@ namespace BookingSystem.API.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Lấy thông tin user
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> CreateBooking([FromBody] CreateBookingCommand command)
         {
