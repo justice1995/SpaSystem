@@ -35,7 +35,8 @@
                 Message = "Internal Server Error. Please try again later 1.",
                 Detailed = _env.IsDevelopment() ? exception.Message : "Something went wrong"
             };
-            // Cmt in DEV
+            // Cmt in ft/login
+            // Cmt in ft/reg
             return context.Response.WriteAsJsonAsync(response);
         }
     }
