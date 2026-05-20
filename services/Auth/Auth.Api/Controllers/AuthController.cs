@@ -21,7 +21,6 @@ namespace Auth.Api.Controllers
         public async Task<IActionResult> Login([FromBody] LoginCommand command)
         {
             var result = await _mediator.Send(command);
-            // Implement login logic here, e.g., send a LoginCommand to the mediator
             return result.ToActionResult();
         }
     }
