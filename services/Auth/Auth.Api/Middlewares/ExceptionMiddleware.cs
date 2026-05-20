@@ -32,7 +32,7 @@
             var response = new
             {
                 StatusCode = 500,
-                Message = "Internal Server Error. Please try again later.",
+                Message = "Internal Server Error. Please try again later 1.",
                 Detailed = _env.IsDevelopment() ? exception.Message : "Something went wrong"
             };
 
