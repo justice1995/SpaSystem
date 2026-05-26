@@ -25,7 +25,8 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build services/BookingService/Booking/BookingService.slnx --configuration Release
-
+      - name: Run unit tests
+        run: dotnet test services/BookingService/Booking/Tests/Tests.csproj --configuration Release --no-build
       - name: dotnet publish
         run: dotnet publish services/BookingService/Booking/Booking.API/BookingSystem.API.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
