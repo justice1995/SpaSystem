@@ -8,6 +8,8 @@ namespace BookingSystem.Domain.Entities
 {
     public class Customer
     {
+        private Customer() { } // for EF
+
         public Customer(string name, string email, string phone)
         {
             Id = Guid.NewGuid();
@@ -32,6 +34,16 @@ namespace BookingSystem.Domain.Entities
         public string Email { get; private set; }
         public string Phone { get; private set; }
         public DateTime CreatedAt { get; private set; }
-    
+
+        public void Update(string name, string email, string phone)
+        {
+            // add minimal validation consistent with domain rules (extend as needed)
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Name must not be empty", nameof(name));
+
+            Name = name;
+            Email = email;
+            Phone = phone;
+        }
     }
 }

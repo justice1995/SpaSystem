@@ -1,9 +1,13 @@
-﻿using BookingSystem.Application.Features.Customers.Command.CreateCustomer;
+﻿using BookingSystem.API.Common;
+using BookingSystem.Application.Features.Customers.Command.CreateCustomer;
+using BookingSystem.Application.Features.Customers.Command.UpdateCustomer;
 using BookingSystem.Application.Features.Customers.Queries.GetAllCustomers;
 using BookingSystem.Application.Features.Customers.Queries.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace BookingSystem.API.Controllers
 {
@@ -38,6 +42,17 @@ namespace BookingSystem.API.Controllers
             if (customer == null)
                 return NotFound();
             return Ok(customer);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCustomer(Guid id, [FromBody] UpdateCustomerCommand command)
+        {
+            if (id != command.Id)
+                return BadRequest("Id mismatch");
+
+            var result = await _mediator.Send(command);
+          
+            return result.ToActionResult();
         }
     }
 }
