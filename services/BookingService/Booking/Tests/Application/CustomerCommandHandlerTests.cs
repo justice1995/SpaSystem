@@ -94,6 +94,7 @@ namespace Tests.Application
             result.Error.Should().NotBeNull();
             result.Error!.Detail.Should().Be("Customer not found12345000");
 
+
             repoMock.Verify(r => r.GetByIdAsync(command.Id), Times.Once);
             repoMock.Verify(r => r.Update(It.IsAny<Customer>()), Times.Never);
             uowMock.Verify(u => u.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
