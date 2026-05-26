@@ -5,3 +5,8 @@ obj/
 *.suo
 *.cache
 *.log
+
+# Azure Publish Profiles
+**/Properties/PublishProfiles/
+*.pubxml
+*.publishsettings
