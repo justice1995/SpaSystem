@@ -1,4 +1,5 @@
-﻿using BookingSystem.API.Common;
+﻿using Asp.Versioning;
+using BookingSystem.API.Common;
 using BookingSystem.Application.Features.Customers.Command.CreateCustomer;
 using BookingSystem.Application.Features.Customers.Command.UpdateCustomer;
 using BookingSystem.Application.Features.Customers.Queries.GetAllCustomers;
@@ -11,7 +12,9 @@ using System.Threading.Tasks;
 
 namespace BookingSystem.API.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/customer")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
