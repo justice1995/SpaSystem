@@ -13,13 +13,15 @@ namespace Auth.Application.Features.Auths.Login
     {
         private readonly IUserRepository _userRepository;
         private readonly IJwtService _jwtService;
-        private readonly IRefreshTokenStore _refreshTokenStore;
+        //private readonly IRefreshTokenStore _refreshTokenStore;
         private readonly IPasswordHasher _passwordHasher;
-        public LoginCommandHandler(IUserRepository userRepository, IJwtService jwtService, IRefreshTokenStore refreshTokenStore, IPasswordHasher passwordHasher)
+        public LoginCommandHandler(IUserRepository userRepository, IJwtService jwtService
+            //IRefreshTokenStore refreshTokenStore
+            , IPasswordHasher passwordHasher)
         {
             _userRepository = userRepository;
             _jwtService = jwtService;
-            _refreshTokenStore = refreshTokenStore;
+           //_refreshTokenStore = refreshTokenStore;
             _passwordHasher = passwordHasher;
         }
         public async Task<Result<LoginResponseDto>> Handle(LoginCommand request, CancellationToken cancellationToken)
