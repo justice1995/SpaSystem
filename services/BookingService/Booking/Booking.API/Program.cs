@@ -3,10 +3,13 @@ using BookingSystem.API.Middlewares;
 using BookingSystem.Application.DependencyInjection;
 using BookingSystem.Application.Features.Services.Command.CreateService;
 using BookingSystem.Infrastructure.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
+using System.Text;
 
 
 Log.Logger = new LoggerConfiguration()
@@ -74,8 +77,60 @@ builder.Services.AddSwaggerGen(options =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
     options.IncludeXmlComments(xmlPath);
+
+    // JWT Bearer in Swagger
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Description = "Enter 'Bearer {token}'",
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, jwtSecurityScheme);
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
 });
 
+// JWT settings from configuration
+var jwtSection = builder.Configuration.GetSection("Jwt");
+var issuer = jwtSection["Issuer"];
+var audience = jwtSection["Audience"];
+var secret = jwtSection["Secret"];
+
+// Register Authentication / Authorization
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = true;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = !string.IsNullOrEmpty(issuer),
+        ValidIssuer = issuer,
+        ValidateAudience = !string.IsNullOrEmpty(audience),
+        ValidAudience = audience,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret ?? string.Empty)),
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
+    };
+});
+builder.Services.AddAuthorization();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
@@ -89,12 +144,11 @@ app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
-
     options.SwaggerEndpoint("/swagger/v2/swagger.json", "API V2");
 });
 //app.UseExceptionHandler("/error");
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseMiddleware<ExceptionMiddleware>();
