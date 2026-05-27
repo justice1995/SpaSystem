@@ -1,9 +1,13 @@
 using Auth.Api.Middlewares;
 using Auth.Application;
 using Auth.Infrastructure;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var keyVaultUrl = new Uri("https://bookingsystem-keyvault.vault.azure.net/");
+builder.Configuration.AddAzureKeyVault(
+    keyVaultUrl,
+    new DefaultAzureCredential());
 // Add services to the container.
 
 builder.Services.AddControllers();
