@@ -1,5 +1,6 @@
 ﻿using Auth.Domain.Entities;
 using Auth.Domain.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -15,9 +16,11 @@ namespace Auth.Infrastructure.Authentication
     public class JwtService : IJwtService
     {
         private readonly JwtSettings _settings;
-        public JwtService(IOptions<JwtSettings> options)
+        private readonly IConfiguration _configuration;
+        public JwtService(IOptions<JwtSettings> options, IConfiguration configuration)
         {
             _settings = options.Value;
+            _configuration = configuration;
         }
         public string GenerateAccessToken(User user)
         {
@@ -30,7 +33,9 @@ namespace Auth.Infrastructure.Authentication
             };
 
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_settings.Secret));
+                Encoding.UTF8.GetBytes(_configuration["JwtSecret"]));
+            //var key = new SymmetricSecurityKey(
+            //    Encoding.UTF8.GetBytes(_settings.Secret));
 
             var creds = new SigningCredentials(
                 key,
