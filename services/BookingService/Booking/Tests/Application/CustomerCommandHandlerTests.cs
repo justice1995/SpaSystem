@@ -92,7 +92,7 @@ namespace Tests.Application
             result.Should().NotBeNull();
             result.IsSuccess.Should().BeFalse();
             result.Error.Should().NotBeNull();
-            result.Error!.Detail.Should().Be("Customer not found123450001234567");
+            result.Error!.Detail.Should().Be("Customer not found");
 
 
             repoMock.Verify(r => r.GetByIdAsync(command.Id), Times.Once);
