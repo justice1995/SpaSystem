@@ -36,10 +36,10 @@ namespace Auth.Application.Features.Auths.Login
             var accessToken = _jwtService.GenerateAccessToken(user);
             var refreshToken = Guid.NewGuid().ToString();
 
-            await _refreshTokenStore.SaveAsync(
-            user.Id,
-            refreshToken,
-            TimeSpan.FromDays(7));
+            //await _refreshTokenStore.SaveAsync(
+            //user.Id,
+            //refreshToken,
+            //TimeSpan.FromDays(7));
             return Result<LoginResponseDto>.Success(new LoginResponseDto(accessToken, refreshToken));
         }
     }
