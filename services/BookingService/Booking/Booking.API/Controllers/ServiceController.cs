@@ -7,11 +7,13 @@ using BookingSystem.Application.Features.Services.DTOs;
 using BookingSystem.Application.Features.Services.Queries.GetAllServices;
 using BookingSystem.Application.Features.Services.Queries.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookingSystem.API.Controllers
 {
+    [Authorize]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/service")]
     [ApiController]
