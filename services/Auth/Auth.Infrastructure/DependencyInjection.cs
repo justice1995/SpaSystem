@@ -48,7 +48,7 @@ namespace Auth.Infrastructure
             //});
 
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
-
+            //comment
             //services.AddSingleton<IConnectionMultiplexer>(
             //ConnectionMultiplexer.Connect("localhost:6379"));
 
