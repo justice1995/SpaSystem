@@ -49,8 +49,8 @@ namespace Auth.Infrastructure
 
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
-            services.AddSingleton<IConnectionMultiplexer>(
-            ConnectionMultiplexer.Connect("localhost:6379"));
+            //services.AddSingleton<IConnectionMultiplexer>(
+            //ConnectionMultiplexer.Connect("localhost:6379"));
 
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IRefreshTokenStore, RedisRefreshTokenStore>();
