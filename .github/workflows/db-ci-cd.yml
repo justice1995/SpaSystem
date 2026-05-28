@@ -1,57 +1,41 @@
 name: Database CI/CD
 
 on:
-
   push:
-
     branches:
-
       - develop
-
     paths:
-
       - 'services/BookingService/Booking/BookingDatabase/**'
 
 jobs:
-
   deploy-db:
-
     runs-on: windows-2022
-
     steps:
-
       - uses: actions/checkout@v4
 
       - name: Setup MSBuild
-
         uses: microsoft/setup-msbuild@v2
 
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1
+
+      - name: Restore NuGet Packages
+        run: nuget restore services\BookingService\Booking\BookingDatabase\BookingDatabase.sqlproj
+
       - name: Build SQL Project
-
-        shell: cmd
-
         run: |
-
           msbuild services\BookingService\Booking\BookingDatabase\BookingDatabase.sqlproj ^
           /p:Configuration=Release ^
           /p:Platform="Any CPU" ^
-          /p:SqlPublishSettings=Properties\PublishProfiles\Default.publish.xml ^
-          /p:DSP=Microsoft.Data.Tools.Schema.Sql.Sql170DatabaseSchemaProvider
+          /p:TargetDatabaseSet=True
 
       - name: Verify DACPAC
-
         shell: powershell
-
         run: |
-
-          dir services\BookingService\Booking\BookingDatabase\bin\Release
+          Get-ChildItem -Path services\BookingService\Booking\BookingDatabase\bin\Release\ -Filter *.dacpac
 
       - name: Install SqlPackage
-
         uses: azure/sql-action@v2
-
         with:
-
           connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-
           path: services/BookingService/Booking/BookingDatabase/bin/Release/BookingDatabase.dacpac
