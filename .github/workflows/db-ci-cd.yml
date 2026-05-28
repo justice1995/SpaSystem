@@ -32,7 +32,7 @@ jobs:
 
       - name: Build SQL Project
 
-        run: dotnet build database/BookingDatabase.sqlproj -c Release
+        run: dotnet build services/BookingService/Booking/BookingDatabase/BookingDatabase.sqlproj -c Release
 
       - name: Deploy DACPAC
 
@@ -42,4 +42,4 @@ jobs:
 
           connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
 
-          path: database/bin/Release/BookingDatabase.dacpac
+          path: services/BookingService/Booking/BookingDatabase/bin/Release/BookingDatabase.dacpac
