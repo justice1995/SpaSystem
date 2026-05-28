@@ -1,6 +1,6 @@
-create or alter proc GetUser
+create proc GetUser
 as
 begin
-select 3
+	select 3
 	select * from Users
 end
