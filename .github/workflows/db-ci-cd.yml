@@ -10,7 +10,7 @@ on:
 
     paths:
 
-      - 'database/**'
+      - 'services/BookingService/Booking/BookingDatabase/**'
 
 jobs:
 
