@@ -24,10 +24,7 @@ jobs:
 
       - name: Build SQL Project
         run: |
-          msbuild services\BookingService\Booking\BookingDatabase\BookingDatabase.sqlproj ^
-          /p:Configuration=Release ^
-          /p:Platform="Any CPU" ^
-          /p:TargetDatabaseSet=True
+          msbuild services\BookingService\Booking\BookingDatabase\BookingDatabase.sqlproj /p:Configuration=Release /p:Platform="Any CPU" /p:TargetDatabaseSet=True
 
       - name: Verify DACPAC
         shell: powershell
