@@ -35,7 +35,8 @@ jobs:
           msbuild services\BookingService\Booking\BookingDatabase\BookingDatabase.sqlproj ^
           /p:Configuration=Release ^
           /p:Platform="Any CPU" ^
-          /v:diag
+          /p:SqlPublishSettings=Properties\PublishProfiles\Default.publish.xml ^
+          /p:DSP=Microsoft.Data.Tools.Schema.Sql.Sql170DatabaseSchemaProvider
 
       - name: Verify DACPAC
 
