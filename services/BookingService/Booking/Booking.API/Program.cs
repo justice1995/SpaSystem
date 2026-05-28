@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using Azure.Identity;
 using BookingSystem.API.Middlewares;
 using BookingSystem.Application.DependencyInjection;
 using BookingSystem.Application.Features.Services.Command.CreateService;
@@ -23,7 +24,10 @@ Log.Logger = new LoggerConfiguration()
 
 
 var builder = WebApplication.CreateBuilder(args);
-
+var keyVaultUrl = new Uri("https://bookingsystem-keyvault.vault.azure.net/");
+builder.Configuration.AddAzureKeyVault(
+    keyVaultUrl,
+    new DefaultAzureCredential());
 //Serilog configuration
 builder.Host.UseSerilog();
 
@@ -106,7 +110,8 @@ builder.Services.AddSwaggerGen(options =>
 var jwtSection = builder.Configuration.GetSection("Jwt");
 var issuer = jwtSection["Issuer"];
 var audience = jwtSection["Audience"];
-var secret = jwtSection["Secret"];
+//var secret = jwtSection["Secret"];
+var secret = builder.Configuration["JwtSecret"];
 
 // Register Authentication / Authorization
 builder.Services.AddAuthentication(options =>

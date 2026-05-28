@@ -65,7 +65,7 @@ namespace BookingSystem.API.Controllers
         {
             return Ok(new
             {
-                secret = _configuration["Jwt:Secret"]
+                secret = _configuration["JwtSecret"]
             });
         }
     }
