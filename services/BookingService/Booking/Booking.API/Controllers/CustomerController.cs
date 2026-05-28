@@ -19,9 +19,11 @@ namespace BookingSystem.API.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public CustomerController(IMediator mediator)
+        private readonly IConfiguration _configuration;
+        public CustomerController(IMediator mediator, IConfiguration configuration)
         {
             _mediator = mediator;
+            _configuration = configuration;
         }
 
         [HttpPost]
@@ -56,6 +58,15 @@ namespace BookingSystem.API.Controllers
             var result = await _mediator.Send(command);
           
             return result.ToActionResult();
+        }
+
+        [HttpGet("secret")]
+        public async Task<IActionResult> GetSecret()
+        {
+            return Ok(new
+            {
+                secret = _configuration["Jwt:Secret"]
+            });
         }
     }
 }
