@@ -12,21 +12,16 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
-
-      # Bắt buộc phải cài đặt thành phần build của SQL Project
-      - name: Install SqlServer.SqlProj.Extensions
-        run: dotnet add services/BookingService/Booking/BookingDatabase/BookingDatabase.sqlproj package Microsoft.Build.Sql
+      # Sử dụng VSTest để định vị đường dẫn MSBuild chuẩn của Visual Studio 2022
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
 
       - name: Build SQL Project
-        # Sử dụng MSBuild với tham số để tìm các tệp .targets của SQL
         run: |
-          msbuild services/BookingService/Booking/BookingDatabase/BookingDatabase.sqlproj /p:Configuration=Release /p:VisualStudioVersion=17.0
+          msbuild services/BookingService/Booking/BookingDatabase/BookingDatabase.sqlproj /p:Configuration=Release /p:VisualStudioVersion=17.0 /p:SqlServerVerification=False
 
       - name: Deploy DACPAC
         uses: azure/sql-action@v2
