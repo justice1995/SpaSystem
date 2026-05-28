@@ -15,17 +15,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Sử dụng lệnh dotnet để build dự án SQL thành file .dacpac
-      # Lệnh này gọi trực tiếp SqlPackage thông qua dotnet, tránh lỗi MSBuild cũ
+      - name: Install SqlPackage
+        run: dotnet tool install -g Microsoft.SqlPackage
+
       - name: Build SQL Project
+        # Chuyển từ dotnet build sang sqlpackage build trực tiếp
         run: |
-          dotnet tool install -g Microsoft.SqlPackage
-          sqlpackage /Action:Extract /SourceConnectionString:"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=true" /TargetFile:BookingDatabase.dacpac
-          # Hoặc cách tốt hơn cho SQL Project là dùng lệnh build trực tiếp vào bin:
-          dotnet build services/BookingService/Booking/BookingDatabase/BookingDatabase.sqlproj /p:Configuration=Release
+          sqlpackage /Action:Build /SourceFile:services/BookingService/Booking/BookingDatabase/BookingDatabase.sqlproj /TargetFile:BookingDatabase.dacpac
 
       - name: Deploy DACPAC
         uses: azure/sql-action@v2
         with:
           connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-          path: services/BookingService/Booking/BookingDatabase/bin/Release/BookingDatabase.dacpac
+          path: ./BookingDatabase.dacpac
