@@ -4,18 +4,14 @@ on:
   push:
     branches:
       - develop
-
     paths:
       - 'services/BookingService/Booking/BookingDatabase/**'
 
 jobs:
-
   deploy-db:
-
     runs-on: windows-latest
 
     steps:
-
       - uses: actions/checkout@v4
 
       - name: Setup .NET
@@ -23,15 +19,14 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
-
-      
+      # Bắt buộc phải cài đặt thành phần build của SQL Project
+      - name: Install SqlServer.SqlProj.Extensions
+        run: dotnet add services/BookingService/Booking/BookingDatabase/BookingDatabase.sqlproj package Microsoft.Build.Sql
 
       - name: Build SQL Project
-        shell: cmd
+        # Sử dụng MSBuild với tham số để tìm các tệp .targets của SQL
         run: |
-          msbuild services/BookingService/Booking/BookingDatabase/BookingDatabase.sqlproj /p:Configuration=Release
+          msbuild services/BookingService/Booking/BookingDatabase/BookingDatabase.sqlproj /p:Configuration=Release /p:VisualStudioVersion=17.0
 
       - name: Deploy DACPAC
         uses: azure/sql-action@v2
