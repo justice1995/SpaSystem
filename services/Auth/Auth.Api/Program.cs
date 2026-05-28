@@ -4,7 +4,7 @@ using Auth.Infrastructure;
 using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
-if (!builder.Environment.IsDevelopment())
+if (builder.Environment.IsProduction())
 {
     var keyVaultUrl = new Uri("https://bookingsystem-keyvault.vault.azure.net/");
     builder.Configuration.AddAzureKeyVault(
