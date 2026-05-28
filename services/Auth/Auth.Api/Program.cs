@@ -41,5 +41,12 @@ app.UseAuthorization();
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
-
+app.MapGet("/env", (IHostEnvironment env) =>
+{
+    return env.EnvironmentName;
+});
+app.MapGet("/jwtsecret", (IConfiguration config) =>
+{
+    return config["Jwt:Secret"];
+});
 app.Run();
