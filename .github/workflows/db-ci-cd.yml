@@ -1,37 +1,51 @@
 name: Database CI/CD
 
 on:
+
   push:
+
     branches:
+
       - develop
 
     paths:
+
       - 'services/BookingService/Booking/BookingDatabase/**'
 
 jobs:
 
   deploy-db:
 
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
 
       - uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
-
       - name: Setup MSBuild
+
         uses: microsoft/setup-msbuild@v2
 
       - name: Build SQL Project
-        shell: cmd
-        run: |
-          msbuild services\BookingService\Booking\BookingDatabase\BookingDatabase.sqlproj /p:Configuration=Release
 
-      - name: Deploy DACPAC
+        shell: cmd
+
+        run: |
+
+          msbuild services\BookingService\Booking\BookingDatabase\BookingDatabase.sqlproj ^
+          /p:Configuration=Release ^
+          /p:Platform="Any CPU"
+
+      - name: Verify DACPAC
+
+        shell: powershell
+
+        run: |
+
+          dir services\BookingService\Booking\BookingDatabase\bin\Release
+
+      - name: Install SqlPackage
+
         uses: azure/sql-action@v2
 
         with:
