@@ -32,7 +32,7 @@ jobs:
 
       - name: Build SQL Project
 
-        run: dotnet build services/BookingService/Booking/BookingDatabase/BookingDatabase.sqlproj -c Release
+        run: msbuild services/BookingService/Booking/BookingDatabase/BookingDatabase.sqlproj -c Release
 
       - name: Deploy DACPAC
 
