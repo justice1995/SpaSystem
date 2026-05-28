@@ -24,16 +24,18 @@ namespace Auth.Infrastructure.Authentication
         }
         public string GenerateAccessToken(User user)
         {
+            var secret = _configuration["JwtSecret"];
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(ClaimTypes.Role, "User"),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("Secret", secret)
             };
 
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_configuration["JwtSecret"]));
+                Encoding.UTF8.GetBytes(secret));
             //var key = new SymmetricSecurityKey(
             //    Encoding.UTF8.GetBytes(_settings.Secret));
 
