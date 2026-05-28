@@ -1,6 +1,6 @@
 create proc GetUser
 as
 begin
-	select 6
+	select 9
 	select * from Users
 end
