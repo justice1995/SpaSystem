@@ -8,7 +8,10 @@ on:
     branches:
       - develop
     paths:
-      - 'services/BookingService/**'
+      - 'services/BookingService/Booking/Booking.API/**'
+      - 'services/BookingService/Booking/Booking.Application/**'
+      - 'services/BookingService/Booking/Booking.Domain/**'
+      - 'services/BookingService/Booking/Booking.Infrastructure/**'
   workflow_dispatch:
 
 jobs:
