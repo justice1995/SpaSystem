@@ -24,10 +24,14 @@ Log.Logger = new LoggerConfiguration()
 
 
 var builder = WebApplication.CreateBuilder(args);
-var keyVaultUrl = new Uri("https://bookingsystem-keyvault.vault.azure.net/");
-builder.Configuration.AddAzureKeyVault(
-    keyVaultUrl,
-    new DefaultAzureCredential());
+if(!builder.Environment.IsDevelopment())
+{
+    var keyVaultUrl = new Uri("https://bookingsystem-keyvault.vault.azure.net/");
+    builder.Configuration.AddAzureKeyVault(
+        keyVaultUrl,
+        new DefaultAzureCredential());
+}
+
 //Serilog configuration
 builder.Host.UseSerilog();
 
@@ -111,7 +115,7 @@ var jwtSection = builder.Configuration.GetSection("Jwt");
 var issuer = jwtSection["Issuer"];
 var audience = jwtSection["Audience"];
 //var secret = jwtSection["Secret"];
-var secret = builder.Configuration["JwtSecret"];
+var secret = builder.Configuration["Jwt:Secret"];
 
 // Register Authentication / Authorization
 builder.Services.AddAuthentication(options =>

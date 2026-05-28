@@ -24,7 +24,7 @@ namespace Auth.Infrastructure.Authentication
         }
         public string GenerateAccessToken(User user)
         {
-            var secret = _configuration["JwtSecret"];
+            var secret = _configuration["Jwt:Secret"];
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),

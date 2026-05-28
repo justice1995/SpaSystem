@@ -47,7 +47,7 @@ namespace Auth.Infrastructure
             //    options.InstanceName = "AuthApi:";
             //});
 
-            services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+            services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
             //comment
             //services.AddSingleton<IConnectionMultiplexer>(
             //ConnectionMultiplexer.Connect("localhost:6379"));
