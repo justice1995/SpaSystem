@@ -2,7 +2,7 @@ CREATE or alter PROCEDURE GetEmployees
 AS
 BEGIN
 	
-	select 9
+	select 10
 	SELECT *
 
 	FROM dbo.Employees
