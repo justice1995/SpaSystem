@@ -34,7 +34,8 @@ jobs:
 
           msbuild services\BookingService\Booking\BookingDatabase\BookingDatabase.sqlproj ^
           /p:Configuration=Release ^
-          /p:Platform="Any CPU"
+          /p:Platform="Any CPU" ^
+          /v:diag
 
       - name: Verify DACPAC
 
